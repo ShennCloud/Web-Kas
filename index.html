@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Web Kas</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main>
+    <header class="atas">
+      <div>
+        <h1>Buku Kas</h1>
+        <p class="status" id="status">Tampilan baca-saja</p>
+      </div>
+      <button id="btnAuth" class="tombol-garis">Masuk bendahara</button>
+    </header>
+
+    <section class="saldo" aria-live="polite">
+      <p class="label">Saldo saat ini</p>
+      <p class="angka-besar" id="saldo">Rp0</p>
+      <dl class="ringkas">
+        <div><dt>Total masuk</dt><dd id="totalMasuk" class="masuk">Rp0</dd></div>
+        <div><dt>Total keluar</dt><dd id="totalKeluar" class="keluar">Rp0</dd></div>
+      </dl>
+    </section>
+
+    <section id="panelForm" class="form-panel" hidden>
+      <h2>Catat transaksi</h2>
+      <form id="formTransaksi">
+        <div class="pilih-jenis" role="radiogroup" aria-label="Jenis transaksi">
+          <label><input type="radio" name="jenis" value="masuk" checked> Uang masuk</label>
+          <label><input type="radio" name="jenis" value="keluar"> Uang keluar</label>
+        </div>
+        <div class="baris-form">
+          <label>Tanggal
+            <input type="date" id="tanggal" required>
+          </label>
+          <label>Jumlah (Rp)
+            <input type="number" id="jumlah" min="1" step="1" inputmode="numeric" required>
+          </label>
+        </div>
+        <label>Keterangan
+          <input type="text" id="keterangan" maxlength="120" placeholder="Contoh: Iuran Budi, beli spidol">
+        </label>
+        <button type="submit" class="tombol-isi">Simpan transaksi</button>
+      </form>
+    </section>
+
+    <section class="riwayat">
+      <div class="bar-riwayat">
+        <h2>Riwayat</h2>
+        <label class="filter">Bulan
+          <select id="filterBulan"></select>
+        </label>
+      </div>
+      <ul id="daftar" class="buku"></ul>
+      <p id="kosong" class="kosong" hidden>Belum ada transaksi. Bendahara bisa mencatat yang pertama setelah masuk.</p>
+    </section>
+  </main>
+
+  <dialog id="dialogLogin">
+    <form id="formLogin" method="dialog">
+      <h2>Masuk sebagai bendahara</h2>
+      <label>Email
+        <input type="email" id="email" autocomplete="username" required>
+      </label>
+      <label>Password
+        <input type="password" id="password" autocomplete="current-password" required>
+      </label>
+      <p id="pesanLogin" class="pesan-error" role="alert"></p>
+      <div class="aksi-dialog">
+        <button type="button" id="batalLogin" class="tombol-garis">Batal</button>
+        <button type="submit" class="tombol-isi">Masuk</button>
+      </div>
+    </form>
+  </dialog>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="script.js"></script>
+</body>
+</html>
